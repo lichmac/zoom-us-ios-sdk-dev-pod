@@ -19,7 +19,9 @@
 #import <MobileRTC/MobileRTCMeetingService+Chat.h>
 #import <MobileRTC/MobileRTCMeetingService+Webinar.h>
 #import <MobileRTC/MobileRTCMeetingService+VirtualBackground.h>
+#import <MobileRTC/MobileRTCMeetingService+Interpretation.h>
 #import <MobileRTC/MobileRTCMeetingService+BO.h>
+#import <MobileRTC/MobileRTCMeetingService+Reaction.h>
 #import <MobileRTC/MobileRTCMeetingSettings.h>
 #import <MobileRTC/MobileRTCInviteHelper.h>
 #import <MobileRTC/MobileRTCPremeetingService.h>
@@ -35,7 +37,9 @@
 #import <MobileRTC/MobileRTCWaitingRoomService.h>
 #import <MobileRTC/MobileRTCRenderer.h>
 #import <MobileRTC/MobileRTCAudioRawDataHelper.h>
+#import <MobileRTC/MobileRTCVideoSourceHelper.h>
 #import <MobileRTC/MobileRTCSMSService.h>
+#import <MobileRTC/MobileRTCDirectShareService.h>
 
 /*!
  @brief MobileRTCSDKInitContext.
@@ -98,6 +102,9 @@
     MobileRTCWaitingRoomService     *_waitingRoomService;
     
     MobileRTCSMSService             *_smsService;
+    MobileRTCDirectShareService     *_directShareService;
+    
+    MobileRTCVideoSourceHelper      *_videoSourceHelper;
 }
 
 /*!
@@ -133,6 +140,7 @@
  @brief Call the function to switch MobileRTC domain.
  @param newDomain The new domain.
  @return YES indicates successfully. Otherwise not.
+ @warning After switch domain, need to auth again.
  */
 - (BOOL)switchDomain:(NSString * _Nonnull)newDomain force:(BOOL)force;
 
@@ -226,11 +234,17 @@
 - (MobileRTCSMSService * _Nullable)getSMSService;
 
 /*!
+@brief Get the default MobileRTC direct share service.
+@return The MobileRTC direct share service.
+*/
+- (MobileRTCDirectShareService * _Nullable)getDirectShareService;
+
+/*!
  @brief Get the languages supported by MobileRTC.   
  @warning The languages supported by MobileRTC are English, German, Spanish, Japanese, French, Simplified Chinese, Traditional Chinese.
  @return An array of languages supported by MobileRTC.
  */
-- (NSArray * _Nonnull)supportedLanguages;
+- (NSArray <NSString *> * _Nonnull)supportedLanguages;
 
 /*!
  @brief Set the MobileRTC language.
@@ -264,9 +278,33 @@
 - (void)appWillTerminate;
 
 /*!
+@brief Notify MobileRTC when the root UIViewController's traitCollection will change
+@param newCollection The first parameter of willTransitionToTraitCollection:withTransitionCoordinator which is UIContentContainer method.
+@param coordinator The second parameter of willTransitionToTraitCollection:withTransitionCoordinator which is UIContentContainer method.
+@warning Not work in Custom In-Meeting UI.
+@warning Call this method when the window.rootViewController recevived willTransitionToTraitCollection:withTransitionCoordinator.
+*/
+- (void)willTransitionToTraitCollection:(UITraitCollection *_Nullable)newCollection withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>_Nullable)coordinator;
+
+/*!
+@brief Notify MobileRTC when the root UIViewController's view size will change
+@param size The first parameter of viewWillTransitionToSize:withTransitionCoordinator.
+@param coordinator the second parameter of viewWillTransitionToSize:withTransitionCoordinator.
+@warning Not work in Custom In-Meeting UI.
+@warning Call this method when the window.rootViewController recevived viewWillTransitionToSize:withTransitionCoordinator.
+*/
+- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>_Nullable)coordinator;
+
+/*!
  @brief Gets whether you have permission to use raw data.
  @warning It is necessary to call the method after auth success.
  */
 - (BOOL)hasRawDataLicense;
+
+/*!
+@brief Get the video source helper.@see MobileRTCVideoSourceHelper
+@return The object of MobileRTCVideoSourceHelper.
+*/
+- (MobileRTCVideoSourceHelper * _Nullable)getVideoSourceHelper;
 
 @end

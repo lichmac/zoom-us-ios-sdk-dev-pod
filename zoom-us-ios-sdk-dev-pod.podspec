@@ -9,16 +9,16 @@
 
 Pod::Spec.new do |spec|
   spec.name         = "ZoomSDK"
-  spec.version      = "5.0.24433.0616"
+  spec.version      = "5.4.54520.1229"
   spec.summary      = "Original framework for Zoom.us iOS SDK with x86_64 for simulator"
   spec.homepage     = "https://github.com/zoom/zoom-sdk-ios"
   spec.license      = "MIT"
-  spec.author             = { "Mokriya" => "info@mokriya.com" }
+  spec.author             = { "Lich Mac" => "maclich@gmail.com" }
 
   spec.swift_version              = "5.0"
   spec.ios.deployment_target      = "9.0"
 
-  spec.source       = { :git => "https://github.com/mokriya-org/zoom-us-ios-sdk-dev-pod.git", :tag => "v#{spec.version}" }
+  spec.source       = { :git => "https://github.com/lichmac/zoom-us-ios-sdk-dev-pod.git", :tag => "v#{spec.version}" }
 
   # spec.libraries = "z", "c++", "sqlite3"
   # spec.frameworks = "Foundation", "UIKit", "VideoToolbox", "CoreBluetooth", "ReplayKit", "CoreMotion"
