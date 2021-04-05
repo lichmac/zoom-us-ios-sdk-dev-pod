@@ -1,7 +1,7 @@
 # zoom-us-ios-sdk-dev-pod
 
 Zoom iOS SDK with Device and Simulator Support
-[ZOOM iOS SDK RELEASE](https://github.com/zoom/zoom-sdk-ios/releases/tag/v5.4.54520.1229)
+[ZOOM iOS SDK RELEASE](https://github.com/zvs001/zoom-sdk-pods/releases/download/5.4/zoom-sdk-ios-5.4.54802.0124-all.zip)
 
 ## Overview
 
